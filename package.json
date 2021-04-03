@@ -10,15 +10,11 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:dfx.helloWorld"
+		"*"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "dfx.helloWorld",
-				"title": "Hello World"
-			}
 		]
 	},
 	"scripts": {

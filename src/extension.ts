@@ -2,25 +2,32 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
+let dfxStatusBarItem: vscode.StatusBarItem;
+let runningStatus = false;
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+	const dfxToggleCommandId = 'dfx.toggle';
+	context.subscriptions.push(vscode.commands.registerCommand(dfxToggleCommandId, toggleDfxStatus));
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "dfx" is now active!');
+	// create a new status bar item that we can now manage
+	dfxStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+	dfxStatusBarItem.command = dfxToggleCommandId;
+	dfxStatusBarItem.text = '∞ Checking...';
+	dfxStatusBarItem.show();
+	context.subscriptions.push(dfxStatusBarItem);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('dfx.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+	console.info('[dfx] extension active!');
+}
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Dfx!');
-	});
+function toggleDfxStatus(): void {
+	runningStatus = !runningStatus;
+	updateStatusBarItemText();
+}
 
-	context.subscriptions.push(disposable);
+function updateStatusBarItemText(): void {
+	dfxStatusBarItem.text = runningStatus ? '∞ Running' : '∞ Stopped';
 }
 
 // this method is called when your extension is deactivated

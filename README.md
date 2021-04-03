@@ -1,6 +1,6 @@
-# dfx README
+# dfx
 
-This is the README for your extension "dfx". After writing up a brief description, we recommend including the following sections.
+VS Code Extension for interacting with the dfx cli utility.
 
 ## Features
 
@@ -48,6 +48,7 @@ Fixed issue #.
 Added features X, Y, and Z.
 
 -----------------------------------------------------------------------------------------------------------
+
 ## Following extension guidelines
 
 Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
